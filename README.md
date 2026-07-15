@@ -192,6 +192,19 @@ This imports as a baseline + word-gloss + free-translation interlinear. Morpheme
 segmentation is left to FLEx — glossing here is at the word level, which is what
 a handwritten gloss line gives you.
 
+## Image cleanup
+
+Before OCR, each image is auto-cleaned (unless you pass `--no-preprocess`):
+
+- **Perspective correction** — if a page was *photographed at an angle* (a
+  keystoned trapezoid on a desk/background), it's detected and flattened back to
+  a rectangle via a four-point warp. This only fires when a confident, genuinely
+  skewed page boundary is found, so flat scans are left untouched. Disable just
+  this step with `--no-dewarp` (keeps deskew/contrast).
+- **Deskew** — corrects small rotations.
+- **Contrast/threshold** — CLAHE contrast for the Claude engine; adaptive
+  binarization for Tesseract.
+
 ## Limitations & tips
 
 - **Tesseract on handwriting is genuinely poor.** Expect to rewrite most of it.

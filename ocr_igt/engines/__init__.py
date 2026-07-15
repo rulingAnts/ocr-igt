@@ -11,14 +11,15 @@ from typing import Any
 from .base import Engine
 
 
-def get_engine(name: str, cfg: dict[str, Any], do_preprocess: bool = True) -> Engine:
+def get_engine(name: str, cfg: dict[str, Any], do_preprocess: bool = True,
+               do_dewarp: bool = True) -> Engine:
     name = name.lower()
     if name == "tesseract":
         from .tesseract import TesseractEngine
-        return TesseractEngine(cfg, do_preprocess=do_preprocess)
+        return TesseractEngine(cfg, do_preprocess=do_preprocess, do_dewarp=do_dewarp)
     if name == "claude":
         from .claude import ClaudeEngine
-        return ClaudeEngine(cfg, do_preprocess=do_preprocess)
+        return ClaudeEngine(cfg, do_preprocess=do_preprocess, do_dewarp=do_dewarp)
     raise ValueError(f"unknown engine: {name!r} (choose 'tesseract' or 'claude')")
 
 

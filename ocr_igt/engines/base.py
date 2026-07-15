@@ -12,9 +12,11 @@ from ..models import Document
 class Engine(abc.ABC):
     name: str = "base"
 
-    def __init__(self, cfg: dict[str, Any], do_preprocess: bool = True) -> None:
+    def __init__(self, cfg: dict[str, Any], do_preprocess: bool = True,
+                 do_dewarp: bool = True) -> None:
         self.cfg = cfg
         self.do_preprocess = do_preprocess
+        self.do_dewarp = do_dewarp
 
     @abc.abstractmethod
     def recognize(self, image_path: str | Path) -> Document:

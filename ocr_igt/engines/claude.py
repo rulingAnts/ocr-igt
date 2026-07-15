@@ -141,8 +141,9 @@ Return one entry in `phrases` per interlinear example, in top-to-bottom order.
 class ClaudeEngine(Engine):
     name = "claude"
 
-    def __init__(self, cfg: dict[str, Any], do_preprocess: bool = True) -> None:
-        super().__init__(cfg, do_preprocess=do_preprocess)
+    def __init__(self, cfg: dict[str, Any], do_preprocess: bool = True,
+                 do_dewarp: bool = True) -> None:
+        super().__init__(cfg, do_preprocess=do_preprocess, do_dewarp=do_dewarp)
         self.model = cfg.get("model", "claude-opus-4-8")
         self.max_edge = int(cfg.get("max_edge", 1568))
         self._client = None
@@ -175,7 +176,8 @@ class ClaudeEngine(Engine):
 
         client = self._get_client()
         b64, media_type = image_for_vision(
-            image_path, do_pre=self.do_preprocess, max_edge=self.max_edge
+            image_path, do_pre=self.do_preprocess, max_edge=self.max_edge,
+            dewarp=self.do_dewarp,
         )
 
         resp = client.messages.create(

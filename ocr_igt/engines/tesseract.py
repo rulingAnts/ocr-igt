@@ -35,7 +35,8 @@ class TesseractEngine(Engine):
                 "  brew install tesseract tesseract-lang   # macOS (incl. 'ind')"
             ) from exc
 
-        img = preprocess_for_tesseract(image_path, do_pre=self.do_preprocess)
+        img = preprocess_for_tesseract(image_path, do_pre=self.do_preprocess,
+                                       dewarp=self.do_dewarp)
         lang = self._resolve_lang(pytesseract)
 
         try:

@@ -147,7 +147,9 @@ def cmd_ocr(args: argparse.Namespace) -> int:
     from .engines import get_engine
 
     try:
-        engine = get_engine(cfg["engine"], cfg, do_preprocess=not args.no_preprocess)
+        engine = get_engine(cfg["engine"], cfg,
+                            do_preprocess=not args.no_preprocess,
+                            do_dewarp=not args.no_dewarp)
     except (ValueError, RuntimeError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
@@ -295,7 +297,10 @@ def build_parser() -> argparse.ArgumentParser:
     o.add_argument("--model", help="Claude model id (claude engine only)")
     o.add_argument("--dpi", type=int, default=300, help="PDF render DPI (default 300)")
     o.add_argument("--no-preprocess", action="store_true",
-                   help="skip image cleanup (deskew/contrast/threshold)")
+                   help="skip all image cleanup (dewarp/deskew/contrast/threshold)")
+    o.add_argument("--no-dewarp", action="store_true",
+                   help="skip only perspective correction for angled photos "
+                        "(keep deskew/contrast/threshold)")
     o.add_argument("--yes", "-y", action="store_true",
                    help="don't prompt for anything (writing-system codes AND the "
                         "cost confirmation); use saved values/flags and proceed")
