@@ -203,3 +203,10 @@ a handwritten gloss line gives you.
 - **Nothing is auto-corrected.** Misspelled Indonesian and non-standard Fayu are
   transcribed as written — fixing them is a linguistic decision, left to you.
 - Re-run `build` freely; it just recompiles whatever JSON you point it at.
+
+## License
+
+Licensed under the **GNU Affero General Public License v3.0 only**
+(`AGPL-3.0-only`) — see [LICENSE](LICENSE). In brief: you may use, study, modify,
+and redistribute this software, but if you run a modified version as a network
+service, you must offer that service's users your modified source.
