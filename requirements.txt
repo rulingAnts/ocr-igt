@@ -1,0 +1,13 @@
+# Core (both engines share OpenCV for image cleanup)
+opencv-python-headless>=4.8
+numpy>=1.24
+Pillow>=10.0
+
+# Offline Tesseract engine (also needs the `tesseract` binary — see README)
+pytesseract>=0.3.10
+
+# Claude vision engine
+anthropic>=0.40
+
+# PDF input (render scanned-notebook PDFs to page images)
+PyMuPDF>=1.23
